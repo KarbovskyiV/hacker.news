@@ -10,6 +10,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
         return response()->json(['data' => $posts]);
     }
 
@@ -23,8 +24,53 @@ class PostController extends Controller
         ]);
 
         $post = Post::query()->create($request->all());
+
         return response()->json([
             'data' => $post,
         ], 201);
+    }
+
+    public function show($id)
+    {
+        try {
+            $post = Post::query()->findOrFail($id);
+
+            return response()->json([
+                'status' => 'success',
+                'data' => $post
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'status' => $e->getMessage(),
+                'message' => 'Post not found'
+            ], 404);
+        }
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $request->validate([
+            'author_name' => ['exists:authors,id'],
+            'title' => ['required', 'string', 'max:256'],
+            'link' => ['required', 'string', 'max:256'],
+            'amount_of_upvotes' => ['integer'],
+        ]);
+
+        $post->update($request->all());
+
+        return response()->json([
+            'data' => $post,
+            'message' => 'Post successfully updated',
+        ]);
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return response()->json([
+            'data' => $post,
+            'message' => "Post was successfully deleted",
+        ]);
     }
 }
