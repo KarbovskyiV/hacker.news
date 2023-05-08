@@ -27,6 +27,7 @@ class PostController extends Controller
 
         return response()->json([
             'data' => $post,
+            'message' => 'Post successfully created',
         ], 201);
     }
 
@@ -51,8 +52,8 @@ class PostController extends Controller
     {
         $request->validate([
             'author_name' => ['exists:authors,id'],
-            'title' => ['required', 'string', 'max:256'],
-            'link' => ['required', 'string', 'max:256'],
+            'title' => ['string', 'max:256'],
+            'link' => ['string', 'max:256'],
             'amount_of_upvotes' => ['integer'],
         ]);
 
@@ -70,7 +71,7 @@ class PostController extends Controller
 
         return response()->json([
             'data' => $post,
-            'message' => "Post was successfully deleted",
+            'message' => "Post successfully deleted",
         ]);
     }
 }
