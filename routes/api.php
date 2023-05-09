@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('posts', PostController::class);
+Route::put('posts/{post}/upvote', [PostController::class, 'upvote']);
+
 Route::resource('comments', CommentController::class);
