@@ -65,6 +65,16 @@ class PostController extends Controller
         ]);
     }
 
+    public function upvote(Post $post)
+    {
+        $post->increment('amount_of_upvotes');
+
+        return response()->json([
+            'data' => $post,
+            'message' => 'Amount of upvotes increased',
+        ]);
+    }
+
     public function destroy(Post $post)
     {
         $post->delete();
