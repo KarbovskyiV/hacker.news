@@ -24,6 +24,8 @@ platform to [HackerNews](https://news.ycombinator.com/).
 - API should be well documented with Postman collection. Make sure to
   use [Postman environments and variables](https://learning.postman.com/docs/postman/variables-and-environments/variables/#understanding-variables-and-environments)
   , so you can switch between local API and deployed version. Add Postman collection link to the README
+  https://api.postman.com/collections/24308097-bd04b065-b298-4289-bd63-b28099282fee?access_key=PMAT-01GZZYXF1WE8M3XFMGEY3N2PQJ
+
 
 - API has to run as a Docker container. API + Postgres / MySQL should be launched with docker-compose
 
